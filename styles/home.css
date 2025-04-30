@@ -47,8 +47,14 @@ body {
     cursor: pointer;
 }
 
+#logo{
+    width: 120px;
+    height: 90px;
+    margin-right: 400px;
+}
+
 .productContainer{
-    margin: 170px 100px 100px 100px;
+    margin: 150px 100px 100px 100px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 100px;
@@ -67,7 +73,7 @@ body {
     color: rgb(71, 69, 69);
 }
 
-.product .rate{
+.product .price{
     color: rgb(49, 48, 48);
 }
 
@@ -75,7 +81,7 @@ body {
     width: 170px;
 }
 
-.product .delivery{
+.delivery{
     width: fit-content;
     height: fit-content;
     background-color: rgb(235, 247, 243);
@@ -93,7 +99,7 @@ body {
     margin-left: 10px;
     font-size: 11px;
 }
-.rating{
+.ratingDiv{
     margin-top: 8px;
     background-color: rgb(9, 141, 9);
     width: 70px;
@@ -105,3 +111,85 @@ body {
     gap: 6px;
 }
 
+#arrowIcon{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 70px;
+    left: 120px;
+    cursor: pointer;
+    display: none;
+}
+
+.uniqeProductContainer{
+    margin-top: 120px;
+    display: none;
+    
+}
+
+.productDetails{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 550px;
+    gap: 10px;
+    position: absolute;
+    left: 650px;
+    top: 150px;
+}
+
+#uniqeImg{
+    border: 1px solid rgb(167, 164, 164);
+    width: fit-content;
+    padding: 20px;
+    border-radius: 10px;
+    margin-left: 130px;
+    
+}
+
+#uniqeImg img{
+    width: 300px;
+}
+
+#productDetailHeading{
+    font-size: 25px;
+    color: rgb(71, 71, 71);
+}
+
+#productName{
+    color: rgb(71, 71, 71);
+}
+
+#addToCart{
+    width: 230px;
+    font-size: 20px;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 130px;
+    margin-top: 20px;
+    background-color: rgb(76, 80, 79);
+    color: white;
+    border: none;
+}
+
+#addToCart:hover{
+    background-color: rgb(56, 56, 56)
+}
+
+#searchProduct{
+    display: none;
+    margin-top: 100px;
+    margin-left: 500px;
+    width: 400px;
+    border: 1px solid black;
+    width: fit-content;
+}
+
+#searchInput{
+    height: 30px;
+    width: 300px;
+    /* border: none; */
+
+}
