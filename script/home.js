@@ -1,4 +1,7 @@
-let url = "https://fakestoreapi.com/products"
+
+let url = "https://fakestoreapi.com/products";
+
+
 
 function getAllData() {
     let data = fetch(url, {
@@ -8,108 +11,71 @@ function getAllData() {
     return data;
 }
 
+
+
+
 let checkProduct = true;
+
 
 let productContainer = document.createElement("div");
 productContainer.setAttribute("class", "productContainer");
 
+
 let uniqeProductContainer = document.getElementById("uniqeProductContainer");
+
 
 let searchProductContainer = document.getElementById("searchProductContainer");
 searchProductContainer.style.display = "none";
 
+
 let searchProduct = document.getElementById("searchProduct");
+
+
+let categoriesContainer = document.getElementById("categoriesContainer");
+categoriesContainer.style.display = "none";
+
+
 
 let logo = document.getElementById("logo");
 logo.onclick = function () {
     window.location.reload();
 }
 
+
 let arrowIcon = document.getElementById("arrowIcon");
 arrowIcon.onclick = function () {
     window.location.reload();
 }
 
+
+
+
 async function loadProducts() {
+
     try {
+
         let products = await getAllData();
         let productList = await products.json();
 
-
-
         productList.forEach(function (item) {
 
-            let product = document.createElement("div");
-            product.setAttribute("class", "product");
-
-            let image = document.createElement("img");
-            image.setAttribute("src", item.image);
-            image.setAttribute("draggable", "false")
-
-            let name = document.createElement("h3");
-            name.setAttribute("class", "name");
-            name.innerText = item.title;
-
-            let price = document.createElement("h3");
-            price.setAttribute("class", "price");
-            price.innerText = "₹" + item.price;
-
-            let delivery = document.createElement("span");
-            delivery.setAttribute("class", "delivery");
-            delivery.innerText = "Free Delivery";
-
-            let ratingAndReviews = document.createElement("div");
-            ratingAndReviews.setAttribute("class", "ratingAndReviews");
-
-            let ratingDiv = document.createElement("div");
-            ratingDiv.setAttribute("class", "ratingDiv");
-
-            let ratingValue = document.createElement("p");
-            ratingValue.setAttribute("class", "rating");
-            ratingValue.innerText = item.rating.rate;
-
-            handleRatingColor(ratingValue.innerText, ratingDiv);
-
-            let star = document.createElement("span");
-            star.setAttribute("class", "fa fa-star checked");
-
-            ratingDiv.appendChild(ratingValue);
-            ratingDiv.appendChild(star);
-
-            let reviews = document.createElement("p");
-            reviews.setAttribute("class", "reviews");
-            reviews.innerText = item.rating.count + " Reviews";
-
-            ratingAndReviews.appendChild(ratingDiv);
-            ratingAndReviews.appendChild(reviews);
-
-            product.appendChild(image);
-            product.appendChild(name);
-            product.appendChild(price);
-            product.appendChild(delivery);
-            product.appendChild(ratingAndReviews);
-
-            productContainer.appendChild(product);
-
-            product.onclick = function () {
-
-
-                checkProduct = false;
-                handleUniqeProduct(item.id);
-
-
-
-            }
+            getAllProducts(item, productContainer);
         });
     }
+
     catch (error) {
-        console.log(error);
+        console.log("Load all products error in home page" + error);
     }
 }
 
 loadProducts();
+document.body.appendChild(productContainer);
+
+
+
 
 function handleRatingColor(rate, div) {
+
     if (rate <= 2) {
         div.style.backgroundColor = "red";
     }
@@ -121,88 +87,203 @@ function handleRatingColor(rate, div) {
     }
 }
 
+
+
+
+
 async function handleUniqeProduct(id) {
-    let uniqeproduct = await fetch(url + "/" + id);
-    let product = await uniqeproduct.json();
 
-    productContainer.style.display = "none"
-    arrowIcon.style.display = "block";
-    searchProduct.style.display = "none";
-    searchProductContainer.style.display = "none";
+    try {
+
+        let uniqeproduct = await fetch(url + "/" + id);
+        let product = await uniqeproduct.json();
 
 
-    uniqeProductContainer.style.display = "block";
+        productContainer.style.display = "none"
+        arrowIcon.style.display = "block";
+        searchProduct.style.display = "none";
+        searchProductContainer.style.display = "none";
+        categoriesContainer.style.display = "none";
 
-    let imgDiv = null;
-    let ratingDiv = null;
-    let reviews = null;
 
-    if (checkProduct) {
-        imgDiv = document.getElementById("uniqeImg");
-        imgDiv.innerText = "";
+        uniqeProductContainer.style.display = "block";
 
-        ratingDiv = document.getElementById("ratingDiv");
-        ratingDiv.innerText = "";
 
-        reviews = document.getElementById("reviews");
-        reviews.innerText = "";
+        let imgDiv = null;
+        let ratingDiv = null;
+        let reviews = null;
+
+
+        if (checkProduct) {
+            imgDiv = document.getElementById("uniqeImg");
+            imgDiv.innerText = "";
+
+            ratingDiv = document.getElementById("ratingDiv");
+            ratingDiv.innerText = "";
+
+            reviews = document.getElementById("reviews");
+            reviews.innerText = "";
+        }
+        else {
+            imgDiv = document.createElement("div");
+            imgDiv.setAttribute("id", "uniqeImg");
+
+            ratingDiv = document.createElement("div");
+            ratingDiv.setAttribute("id", "ratingDiv");
+
+            reviews = document.createElement("p");
+            reviews.setAttribute("id", "reviews");
+        }
+
+
+        let image = document.createElement("img");
+        image.setAttribute("src", product.image);
+        image.setAttribute("draggable", "false");
+
+        imgDiv.appendChild(image);
+        uniqeProductContainer.appendChild(imgDiv);
+
+
+        let productName = document.getElementById("productName");
+        let productPrice = document.getElementById("productPrice");
+        let productRating = document.getElementById("productRating");
+
+        productName.innerText = product.title;
+        productPrice.innerText = "₹" + product.price;
+
+
+        let ratingValue = document.createElement("p");
+        ratingValue.setAttribute("class", "rating");
+        ratingValue.innerText = product.rating.rate;
+
+        handleRatingColor(ratingValue.innerText, ratingDiv)
+
+        let star = document.createElement("span");
+        star.setAttribute("class", "fa fa-star checked");
+
+        ratingDiv.appendChild(ratingValue);
+        ratingDiv.appendChild(star);
+
+        reviews.innerText = product.rating.count + " Reviews";
+
+        productRating.appendChild(ratingDiv);
+        productRating.appendChild(reviews);
+
+
+        let productDescription = document.getElementById("productDescription");
+        productDescription.innerText = product.description;
+
+        let addToCartBtn = document.getElementById("addToCart");
+        addToCartBtn.onclick = function () {
+            storeData(product.id, product.title, product.price, product.rating, product.image);
+
+        }
+
     }
-    else {
-        imgDiv = document.createElement("div");
-        imgDiv.setAttribute("id", "uniqeImg");
+    catch (error) {
+        console.log("Uniqe product error "+error);
 
-        ratingDiv = document.createElement("div");
-        ratingDiv.setAttribute("id", "ratingDiv");
-
-        reviews = document.createElement("p");
-        reviews.setAttribute("id", "reviews");
     }
+
+}
+
+
+
+
+
+
+let productClickCount = 0;
+
+function getAllProducts(item, container) {
+
+
+    let product = document.createElement("div");
+    product.setAttribute("class", "product");
 
 
     let image = document.createElement("img");
-    image.setAttribute("src", product.image);
-    image.setAttribute("draggable", "false");
-
-    imgDiv.appendChild(image);
-    uniqeProductContainer.appendChild(imgDiv);
+    image.setAttribute("src", item.image);
+    image.setAttribute("draggable", "false")
 
 
-    let productName = document.getElementById("productName");
-    let productPrice = document.getElementById("productPrice");
-    let productRating = document.getElementById("productRating");
+    let name = document.createElement("h3");
+    name.setAttribute("class", "name");
+    name.innerText = item.title;
 
-    productName.innerText = product.title;
-    productPrice.innerText = "₹" + product.price;
 
+    let price = document.createElement("h3");
+    price.setAttribute("class", "price");
+    price.innerText = "₹" + item.price;
+
+
+    let delivery = document.createElement("span");
+    delivery.setAttribute("class", "delivery");
+    delivery.innerText = "Free Delivery";
+
+
+    let ratingAndReviews = document.createElement("div");
+    ratingAndReviews.setAttribute("class", "ratingAndReviews");
+
+
+    let ratingDiv = document.createElement("div");
+    ratingDiv.setAttribute("class", "ratingDiv");
 
 
     let ratingValue = document.createElement("p");
     ratingValue.setAttribute("class", "rating");
-    ratingValue.innerText = product.rating.rate;
+    ratingValue.innerText = item.rating.rate;
 
-    handleRatingColor(ratingValue.innerText, ratingDiv)
+
+    handleRatingColor(ratingValue.innerText, ratingDiv);
+
 
     let star = document.createElement("span");
     star.setAttribute("class", "fa fa-star checked");
 
+
     ratingDiv.appendChild(ratingValue);
     ratingDiv.appendChild(star);
 
-    reviews.innerText = product.rating.count + " Reviews";
 
-    productRating.appendChild(ratingDiv);
-    productRating.appendChild(reviews);
+    let reviews = document.createElement("p");
+    reviews.setAttribute("class", "reviews");
+    reviews.innerText = item.rating.count + " Reviews";
 
 
-    let productDescription = document.getElementById("productDescription");
-    productDescription.innerText = product.description;
+    ratingAndReviews.appendChild(ratingDiv);
+    ratingAndReviews.appendChild(reviews);
 
-    let addToCartBtn = document.getElementById("addToCart");
-    addToCartBtn.onclick = function () {
-        storeData(product.id, product.title, product.price, product.rating, product.image);
+
+    product.appendChild(image);
+    product.appendChild(name);
+    product.appendChild(price);
+    product.appendChild(delivery);
+    product.appendChild(ratingAndReviews);
+
+    container.appendChild(product);
+
+
+    product.onclick = function () {
+
+        if (!checkProduct) {
+            checkProduct = true;
+            productClickCount++;
+        }
+        else if(productClickCount >= 2){
+            checkProduct = true;
+        }
+        else {
+            checkProduct = false;
+            productClickCount++;
+        }
+
+        handleUniqeProduct(item.id)
     }
-
 }
+
+
+
+
 
 let searchIcon = document.getElementById("search-icon");
 let searchInput = document.getElementById("searchInput");
@@ -212,12 +293,17 @@ searchIcon.onclick = function () {
     uniqeProductContainer.style.display = "none";
     arrowIcon.style.display = "block";
     searchProduct.style.display = "block"
+    categoriesContainer.style.display = "none";
+
     searchProductContainer.style.display = "grid";
 
 
 }
 
-document.body.appendChild(productContainer);
+
+
+
+
 
 
 // Search feature
@@ -230,121 +316,82 @@ searchInput.oninput = function () {
 
 }
 
+
+
+
+
+
 async function handleInput(letters) {
+
     try {
+
         let products = await getAllData();
         let productList = await products.json();
 
+
         productList.forEach(function (item) {
+
             if (item.title.toLowerCase().trim().includes(letters.toLowerCase().trim())) {
 
-                let product = document.createElement("div");
-                product.setAttribute("class", "product");
-
-                let image = document.createElement("img");
-                image.setAttribute("src", item.image);
-                image.setAttribute("draggable", "false")
-
-                let name = document.createElement("h3");
-                name.setAttribute("class", "name");
-                name.innerText = item.title;
-
-                let price = document.createElement("h3");
-                price.setAttribute("class", "price");
-                price.innerText = "₹" + item.price;
-
-                let delivery = document.createElement("span");
-                delivery.setAttribute("class", "delivery");
-                delivery.innerText = "Free Delivery";
-
-                let ratingAndReviews = document.createElement("div");
-                ratingAndReviews.setAttribute("class", "ratingAndReviews");
-
-                let ratingDiv = document.createElement("div");
-                ratingDiv.setAttribute("class", "ratingDiv");
-
-                let ratingValue = document.createElement("p");
-                ratingValue.setAttribute("class", "rating");
-                ratingValue.innerText = item.rating.rate;
-
-                handleRatingColor(ratingValue.innerText, ratingDiv)
-
-                let star = document.createElement("span");
-                star.setAttribute("class", "fa fa-star checked");
-
-                ratingDiv.appendChild(ratingValue);
-                ratingDiv.appendChild(star);
-
-                let reviews = document.createElement("p");
-                reviews.setAttribute("class", "reviews");
-                reviews.innerText = item.rating.count + " Reviews";
-
-                ratingAndReviews.appendChild(ratingDiv);
-                ratingAndReviews.appendChild(reviews);
-
-                product.appendChild(image);
-                product.appendChild(name);
-                product.appendChild(price);
-                product.appendChild(delivery);
-                product.appendChild(ratingAndReviews);
-
-                searchProductContainer.appendChild(product);
-
-                product.onclick = function () {
-
-                    if (!checkProduct) {
-                        checkProduct = true;
-                    }
-                    else {
-                        checkProduct = false;
-                    }
-
-                    handleUniqeProduct(item.id)
-                }
+                getAllProducts(item, searchProductContainer);
             }
         })
 
     }
     catch (error) {
-        console.log(error)
+
+        console.log("Search functionality error" + error)
     }
 }
 
 
-// Handle the add to cart icon
-let addToCartIcon = document.getElementById("add-to-cart-icon");
-addToCartIcon.onclick = function () {
-    window.location.href = "../pages/cart.html"
+
+
+
+
+
+async function handleCategories(category) {
+
+    try{
+
+        categoriesContainer.innerText = "";
+
+        let product = await fetch(url + "/category/" + category);
+        let productList = await product.json();
+
+        productList.forEach(function(item){
+
+            getAllProducts(item, categoriesContainer);
+            console.log(item);
+            
+
+        })
+    }
+    catch(error){
+        console.log("Categories error " + error);
+        
+    }
+
 }
 
 
-function storeData(id, title, price, rating, imageURL) {
-    let obj = {
-        id: id,
-        title: title,
-        price: price,
-        rating: rating,
-        image: imageURL,
-        countOfProduct: 0
+
+let categoryList = document.querySelectorAll(".categories li");
+
+categoryList.forEach(function(category){
+
+    category.onclick = function(){
+
+        productContainer.style.display = "none";
+        uniqeProductContainer.style.display = "none";
+        arrowIcon.style.display = "block";
+        searchProduct.style.display = "none"
+        searchProductContainer.style.display = "none";
+
+        categoriesContainer.style.display = "grid";
+
+        
+        
+        handleCategories(category.innerText.toLowerCase());
     }
-
-
-    let getData = JSON.parse(localStorage.getItem("data")) || [];
-    if (id) {
-        let updatedProduct = getData.map(function (item) {
-            item.id === id ? item.countOfProduct++ : item.countOfProduct = 1;
-        });
-
-        localStorage.setItem("data", JSON.stringify(updatedProduct));
-    }
-    else {
-        getData.push(obj);
-        localStorage.setItem("data", JSON.stringify(getData))
-    }
-
-
-
-
-
-
-}
+})
