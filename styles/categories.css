@@ -105,6 +105,15 @@ body {
     cursor: pointer;
 }
 
+#arrowIcon {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 70px;
+    left: 120px;
+    cursor: pointer;
+}
+
 .productContainer {
     margin: 150px 100px 100px 100px;
     display: grid;
@@ -168,39 +177,4 @@ body {
     justify-content: center;
     align-items: center;
     gap: 6px;
-}
-
-
-#searchProduct {
-    display: none;
-    margin-top: 100px;
-    margin-left: 470px;
-    width: 370px;
-    height: 35px;
-    border: 1px solid black;
-    border-radius: 20px;
-}
-
-#searchInput {
-    width: 320px;
-    height: 30px;
-    position: relative;
-    bottom: 6px;
-    font-size: 20px;
-    padding: 5px;
-    border: none;
-    background-color: transparent;
-}
-
-#searchInput:focus {
-    border: none;
-    outline: none;
-}
-
-
-#searchInputIcon {
-    width: 25px;
-    height: 25px;
-    margin-top: 5px;
-    margin-left: 10px;
 }

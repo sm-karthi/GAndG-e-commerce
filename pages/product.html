@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>product</title>
+    <link rel="stylesheet" href="../styles/product.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+
+    <header>
+        <nav class="navbar">
+            <img src="../image/webLogo.png" alt="Website logo" id="logo" draggable="false">
+
+            <p id="homeLetter">Home</p>
+
+            <div id="categoriesContainer">
+                <p id="categories">Categories <i class="arrow down"></i></p>
+                <div id="categoriesLetterContainer"></div>
+            </div>
+
+            <img src="../image/search-icon.png" alt="search icon" id="search-icon" draggable="false">
+            <img src="../image/add-to-cart-icon.png" alt="Add to cart icon" id="add-to-cart-icon" draggable="false">
+        </nav>
+    </header>
+
+
+    <img src="../image/arrow-icon.png" alt="left arrow icon" id="arrowIcon" draggable="false">
+
+
+    <div class="ProductContainer" id="ProductContainer">
+
+        <div class="productDetails">
+            <h3 id="productDetailHeading">Product Details</h3>
+            <h3 id="productName"></h3>
+            <h3 id="productPrice"></h3>
+            <div id="productRating" class="ratingAndReviews"></div>
+            <span class="delivery">Free Delivery</span>
+            <div id="productDescription"></div>
+            <button id="addToCart">Add to cart</button>
+        </div>
+
+    </div>
+
+    <script src="../script/product.js"></script>
+</body>
+
+</html>

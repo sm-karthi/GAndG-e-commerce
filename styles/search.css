@@ -105,6 +105,15 @@ body {
     cursor: pointer;
 }
 
+#arrowIcon {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 70px;
+    left: 120px;
+    cursor: pointer;
+}
+
 .productContainer {
     margin: 150px 100px 100px 100px;
     display: grid;
@@ -170,9 +179,7 @@ body {
     gap: 6px;
 }
 
-
 #searchProduct {
-    display: none;
     margin-top: 100px;
     margin-left: 470px;
     width: 370px;
