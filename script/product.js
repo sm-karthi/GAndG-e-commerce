@@ -29,8 +29,9 @@ cartProductCount.onclick = function () {
     window.location.href = "../pages/cart.html"
 }
 
-let cartCount = JSON.parse(localStorage.getItem("data"));
+let cartCount = JSON.parse(localStorage.getItem("data")) || [];
 cartProductCount.innerText = cartCount.length;
+
 
 let url = "https://fakestoreapi.com/products";
 
