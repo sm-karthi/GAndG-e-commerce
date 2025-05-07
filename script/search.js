@@ -62,6 +62,21 @@ async function getCategories() {
 getCategories();
 
 
+
+function debouncing(func, delay) {
+    let timer;
+    return function(...args) {
+        clearTimeout(timer);
+        timer = setTimeout(function() {
+            func.apply(this, args);
+        }, delay);
+    };
+}
+
+
+let debouncedLoadProducts = debouncing(loadProducts, 300);
+
+
 let productContainer = document.getElementById("productContainer");
 let searchInput = document.getElementById("searchInput");
 
@@ -95,7 +110,7 @@ searchInput.oninput = function () {
     if (value !== "") {
         productContainer.style.display = "grid";
         productContainer.innerHTML = "";
-        loadProducts(value);
+        debouncedLoadProducts(value);
     } else {
         productContainer.style.display = "none";
         productContainer.innerHTML = "";
