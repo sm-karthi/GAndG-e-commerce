@@ -9,15 +9,28 @@ logo.onclick = function () {
 }
 
 let homeLetter = document.getElementById("homeLetter");
-homeLetter.onclick = function(){
+homeLetter.onclick = function () {
     window.location.href = "../index.html"
 }
 
 
 let searchIcon = document.getElementById("search-icon");
-searchIcon.onclick = function(){
+searchIcon.onclick = function () {
     window.location.href = "../pages/search.html?value="
 }
+
+let addToCartIcon = document.getElementById("add-to-cart-icon");
+addToCartIcon.onclick = function () {
+    window.location.href = "../pages/cart.html"
+}
+
+let cartProductCount = document.getElementById("cartProductCount");
+cartProductCount.onclick = function () {
+    window.location.href = "../pages/cart.html"
+}
+
+let cartCount = JSON.parse(localStorage.getItem("data"));
+cartProductCount.innerText = cartCount.length;
 
 
 let url = "https://fakestoreapi.com/products";
@@ -38,15 +51,15 @@ async function getCategories() {
 
         categoryLetter.innerText = item;
 
-        
+
         categoryDiv.appendChild(categoryLetter);
 
-        categoryLetter.onclick = function(){
+        categoryLetter.onclick = function () {
             window.location.href = `../pages/categories.html?categories=${categoryLetter.innerText}`
         }
-        categoryDiv.onclick = function(){
-            
-            
+        categoryDiv.onclick = function () {
+
+
         }
         categoriesContainer.appendChild(categoryDiv);
     })
@@ -66,10 +79,10 @@ async function loadProducts() {
         let products = await fetch(url + "/category/" + category);
         let productList = await products.json();
 
-       productList.forEach(function(item){
+        productList.forEach(function (item) {
 
-        getAllProducts(item)
-       })
+            getAllProducts(item)
+        })
     }
 
     catch (error) {
@@ -152,7 +165,7 @@ function getAllProducts(item) {
 
     productContainer.appendChild(product);
 
-    product.onclick = function(){
+    product.onclick = function () {
         let productId = item.id;
         window.location.href = `../pages/product.html?id=${productId}`;
     }

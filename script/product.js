@@ -9,15 +9,28 @@ logo.onclick = function () {
 }
 
 let homeLetter = document.getElementById("homeLetter");
-homeLetter.onclick = function(){
+homeLetter.onclick = function () {
     window.location.href = "../index.html"
 }
 
 
 let searchIcon = document.getElementById("search-icon");
-searchIcon.onclick = function(){
+searchIcon.onclick = function () {
     window.location.href = "../pages/search.html?value="
 }
+
+let addToCartIcon = document.getElementById("add-to-cart-icon");
+addToCartIcon.onclick = function () {
+    window.location.href = "../pages/cart.html"
+}
+
+let cartProductCount = document.getElementById("cartProductCount");
+cartProductCount.onclick = function () {
+    window.location.href = "../pages/cart.html"
+}
+
+let cartCount = JSON.parse(localStorage.getItem("data"));
+cartProductCount.innerText = cartCount.length;
 
 let url = "https://fakestoreapi.com/products";
 
@@ -37,10 +50,10 @@ async function getCategories() {
 
         categoryLetter.innerText = item;
 
-        categoryLetter.onclick = function(){
+        categoryLetter.onclick = function () {
             window.location.href = `../pages/categories.html?categories=${categoryLetter.innerText}`
         }
-        
+
         categoryDiv.appendChild(categoryLetter);
         categoriesContainer.appendChild(categoryDiv);
     })
@@ -64,7 +77,6 @@ async function handleProduct(id) {
 
         let uniqeproduct = await fetch(url + "/" + id);
         let product = await uniqeproduct.json();
-
 
 
         let imgDiv = document.createElement("div");
@@ -115,7 +127,11 @@ async function handleProduct(id) {
         productDescription.innerText = product.description;
 
         let addToCartBtn = document.getElementById("addToCart");
-        
+
+        addToCartBtn.onclick = function () {
+            handleCartBtn(product.id, product.image, product.title, product.price, product.rating.rate, product.rating.count);
+        }
+
 
     }
     catch (error) {
@@ -124,6 +140,41 @@ async function handleProduct(id) {
     }
 
 }
+
+
+
+let localData = JSON.parse(localStorage.getItem("data")) || [];
+
+function handleCartBtn(id, image, title, price, rating, reviews) {
+
+    let findProduct = localData.find(function (item) {
+        return item.id === id;
+    });
+
+    if (findProduct) {
+        findProduct.countOfProduct++;
+    }
+    else {
+        let obj = {
+            id: id,
+            image: image,
+            title: title,
+            price: price,
+            rating: rating,
+            reviews: reviews,
+            countOfProduct: 1
+        }
+
+        localData.push(obj);
+    }
+
+    localStorage.setItem("data", JSON.stringify(localData));
+}
+
+
+
+
+
 
 
 function handleRatingColor(rate, div) {
@@ -138,3 +189,7 @@ function handleRatingColor(rate, div) {
         div.style.backgroundColor = "rgb(9, 141, 9)"
     }
 }
+
+
+
+

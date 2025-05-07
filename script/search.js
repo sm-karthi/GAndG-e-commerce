@@ -15,7 +15,18 @@ homeLetter.onclick = function () {
     window.location.href = "../index.html"
 }
 
+let addToCartIcon = document.getElementById("add-to-cart-icon");
+addToCartIcon.onclick = function () {
+    window.location.href = "../pages/cart.html"
+}
 
+let cartProductCount = document.getElementById("cartProductCount");
+cartProductCount.onclick = function () {
+    window.location.href = "../pages/cart.html"
+}
+
+let cartCount = JSON.parse(localStorage.getItem("data"));
+cartProductCount.innerText = cartCount.length;
 
 
 let url = "https://fakestoreapi.com/products";
@@ -83,7 +94,7 @@ searchInput.oninput = function () {
 
     if (value !== "") {
         productContainer.style.display = "grid";
-        productContainer.innerHTML = ""; 
+        productContainer.innerHTML = "";
         loadProducts(value);
     } else {
         productContainer.style.display = "none";
@@ -98,7 +109,7 @@ async function loadProducts(letters) {
         let products = await fetch(url);
         let productList = await products.json();
 
-        productContainer.innerHTML = ""; 
+        productContainer.innerHTML = "";
 
         productList.forEach(function (item) {
             if (item.title.toLowerCase().trim().includes(letters.toLowerCase().trim())) {

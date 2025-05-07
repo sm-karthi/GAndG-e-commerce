@@ -35,7 +35,7 @@ body {
 #add-to-cart-icon {
     width: 40px;
     height: 40px;
-    margin-right: 50px;
+    margin-right: 60px;
     cursor: pointer;
 }
 
@@ -85,6 +85,7 @@ body {
     border-radius: 5px;
 }
 
+
 .arrow {
     border: solid black;
     border-width: 0 3px 3px 0;
@@ -102,7 +103,7 @@ body {
 #logo {
     width: 120px;
     height: 90px;
-    margin-right: 570px;
+    margin-right: 560px;
     cursor: pointer;
 }
 
@@ -115,61 +116,17 @@ body {
     cursor: pointer;
 }
 
-.productContainer {
-    margin: 150px 100px 100px 100px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 60px;
-}
-
-.product {
-    border: 1px solid rgb(167, 164, 164);
-    width: fit-content;
-    padding: 20px;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.product:hover {
-    box-shadow: 1px 1px 7px rgb(152, 152, 152);
-}
-
-.product .name {
-    font-size: 14px;
-    color: rgb(71, 69, 69);
-}
-
-.product .price {
-    color: rgb(49, 48, 48);
-}
-
-.product img {
-    height: 190px;
-    width: 190px;
-}
-
-.delivery {
-    width: fit-content;
-    height: fit-content;
-    background-color: rgb(235, 247, 243);
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-size: 13px;
-}
-
 .ratingAndReviews {
     display: flex;
 }
 
-.ratingAndReviews .reviews,
-#reviews {
+.ratingAndReviews .reviews {
     margin-top: 13px;
     margin-left: 10px;
     font-size: 11px;
 }
 
-.ratingDiv,
-#ratingDiv {
+.ratingDiv {
     margin-top: 8px;
     width: 70px;
     border-radius: 20px;
@@ -180,43 +137,74 @@ body {
     gap: 6px;
 }
 
-#searchProduct {
-    margin-top: 100px;
-    margin-left: 470px;
-    width: 370px;
-    height: 35px;
-    border: 1px solid black;
-    border-radius: 20px;
+#cartContainer {
+    margin: 150px 150px 50px 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-#searchInput {
-    width: 320px;
-    height: 30px;
-    position: relative;
-    bottom: 6px;
+.product {
+    display: flex;
+    gap: 20px;
+    border: 1px solid rgb(167, 164, 164);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.product img {
+    width: 100px;
+    height: 100px;
+    margin-left: 15px;
+}
+
+.product .title {
+    font-size: 14px;
+    color: rgb(71, 69, 69);
+}
+
+.product .price {
     font-size: 20px;
+    color: rgb(49, 48, 48);
+}
+
+#emptyCartletter {
+    margin-top: 200px;
+    text-align: center;
+    color: rgb(71, 69, 69);
+    font-size: 27px;
+}
+
+.product .countOfProduct {
+    position: absolute;
+    right: 330px;
+    margin-top: 70px;
+    display: flex;
+    gap: 15px;
+    background-color: rgb(247, 244, 240);
     padding: 5px;
-    border: none;
-    background-color: transparent;
+    border-radius: 5px;
 }
 
-#searchInput:focus {
-    border: none;
-    outline: none;
+.decrease {
+    cursor: pointer;
 }
 
+.increase {
+    cursor: pointer;
+}
 
-#searchInputIcon {
-    width: 25px;
-    height: 25px;
-    margin-top: 5px;
-    margin-left: 10px;
+#updatedPrice {
+    position: absolute;
+    left: 965px;
+    margin-top: 75px;
+    color: rgb(71, 69, 69);
 }
 
 #cartProductCount {
     position: absolute;
     background-color: red;
-    right: 52.5px;
+    right: 62.5px;
     top: 7px;
     color: white;
     border-radius: 50%;
@@ -224,4 +212,26 @@ body {
     padding: 0px 4px;
     cursor: pointer;
     text-align: center;
+}
+
+#closeBtn {
+    position: absolute;
+    right: 160px;
+    background-color: red;
+    padding: 0px 5px;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#closeBtn:hover {
+    background-color: rgb(179, 19, 19);
+}
+
+#totalPrice {
+    font-weight: bold;
+    margin-bottom: 100px;
+    margin-left: 870px;
+    color: rgb(71, 69, 69);
 }

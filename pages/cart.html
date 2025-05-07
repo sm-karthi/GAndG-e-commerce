@@ -4,19 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categories</title>
-    <link rel="stylesheet" href="../styles/categories.css">
+    <title>Cart</title>
+
+    <link rel="stylesheet" href="../styles/cart.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">
-
-
 </head>
 
 <body>
+
     <header>
         <nav class="navbar">
             <img src="../image/webLogo.png" alt="Website logo" id="logo" draggable="false">
@@ -28,8 +28,6 @@
                 <div id="categoriesLetterContainer"></div>
             </div>
 
-
-
             <img src="../image/search-icon.png" alt="search icon" id="search-icon" draggable="false">
             <img src="../image/add-to-cart-icon.png" alt="Add to cart icon" id="add-to-cart-icon" draggable="false">
 
@@ -37,11 +35,14 @@
         </nav>
     </header>
 
+
     <img src="../image/arrow-icon.png" alt="left arrow icon" id="arrowIcon" draggable="false">
 
-    <div class="productContainer" id="productContainer"></div>
+    <h1 id="emptyCartletter">Your cart is empty</h1>
+    <div id="cartContainer"></div>
+    <div id="totalPrice"></div>
 
-    <script src="../script/categories.js"></script>
+    <script src="../script/cart.js"></script>
 </body>
 
 </html>
