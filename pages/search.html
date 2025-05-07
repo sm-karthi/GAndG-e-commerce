@@ -4,9 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart</title>
-
-    <link rel="stylesheet" href="../styles/cart.css">
+    <title>Search product</title>
+    <link rel="stylesheet" href="../styles/search.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -16,7 +15,6 @@
 </head>
 
 <body>
-
     <header>
         <nav class="navbar">
             <img src="../image/webLogo.png" alt="Website logo" id="logo" draggable="false">
@@ -28,6 +26,8 @@
                 <div id="categoriesLetterContainer"></div>
             </div>
 
+
+
             <img src="../image/search-icon.png" alt="search icon" id="search-icon" draggable="false">
             <img src="../image/add-to-cart-icon.png" alt="Add to cart icon" id="add-to-cart-icon" draggable="false">
 
@@ -35,14 +35,16 @@
         </nav>
     </header>
 
-
     <img src="../image/arrow-icon.png" alt="left arrow icon" id="arrowIcon" draggable="false">
 
-    <h1 id="emptyCartletter">Your cart is empty</h1>
-    <div id="cartContainer"></div>
-    <div id="totalPrice"></div>
+    <div id="searchProduct">
+        <img src="../image/searchInputIcon.png" alt="search input icon" id="searchInputIcon" draggable="false">
+        <input type="text" id="searchInput" placeholder="Search prducts">
+    </div>
 
-    <script src="../script/cart.js"></script>
+    <div class="productContainer" id="productContainer"></div>
+
+    <script src="../script/search.js"></script>
 </body>
 
 </html>

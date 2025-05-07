@@ -20,45 +20,27 @@
         <nav class="navbar">
             <img src="./image/webLogo.png" alt="Website logo" id="logo" draggable="false">
 
-            <ul class="categories">
-                <li>Electronics</li>
-                <li>Jewelery</li>
-                <li>Men's clothing</li>
-                <li>Women's clothing</li>
-            </ul>
+            <p id="homeLetter">Home</p>
+
+            <div id="categoriesContainer">
+                <p id="categories">Categories <i class="arrow down"></i></p>
+                <div id="categoriesLetterContainer"></div>
+            </div>
+
+
 
             <img src="./image/search-icon.png" alt="search icon" id="search-icon" draggable="false">
             <img src="./image/add-to-cart-icon.png" alt="Add to cart icon" id="add-to-cart-icon" draggable="false">
+
+            <span id="cartProductCount">0</span>
         </nav>
     </header>
 
 
-    <img src="./image/arrow-icon.png" alt="left arrow icon" id="arrowIcon" draggable="false">
+
+    <div class="productContainer" id="productContainer"></div>
 
 
-    <div class="uniqeProductContainer" id="uniqeProductContainer">
-        <div class="productDetails">
-            <h3 id="productDetailHeading">Product Details</h3>
-            <h3 id="productName"></h3>
-            <h3 id="productPrice"></h3>
-            <div id="productRating" class="ratingAndReviews"></div>
-            <span class="delivery">Free Delivery</span>
-            <div id="productDescription"></div>
-            <button id="addToCart">Add to cart</button>
-        </div>
-    </div>
-
-
-    <div id="searchProduct">
-        <img src="./image/searchInputIcon.png" alt="search input icon" id="searchInputIcon" draggable="false">
-        <input type="text" id="searchInput" placeholder="Search prducts">
-    </div>
-
-    <div id="searchProductContainer"></div>
-
-
-
-    <div id="categoriesContainer" class="categoriesContainer"></div>
 
     <script src="./script/home.js"></script>
 

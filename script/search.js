@@ -1,5 +1,10 @@
 
 
+let arrowIcon = document.getElementById("arrowIcon");
+arrowIcon.onclick = function () {
+    window.history.back();
+}
+
 let logo = document.getElementById("logo");
 logo.onclick = function () {
     window.location.reload();
@@ -8,11 +13,6 @@ logo.onclick = function () {
 let homeLetter = document.getElementById("homeLetter");
 homeLetter.onclick = function () {
     window.location.href = "../index.html"
-}
-
-let searchIcon = document.getElementById("search-icon");
-searchIcon.onclick = function () {
-    window.location.href = "../pages/search.html?value="
 }
 
 let addToCartIcon = document.getElementById("add-to-cart-icon");
@@ -27,6 +27,7 @@ cartProductCount.onclick = function () {
 
 let cartCount = JSON.parse(localStorage.getItem("data"));
 cartProductCount.innerText = cartCount.length;
+
 
 let url = "https://fakestoreapi.com/products";
 
@@ -61,32 +62,70 @@ async function getCategories() {
 getCategories();
 
 
+let productContainer = document.getElementById("productContainer");
+let searchInput = document.getElementById("searchInput");
 
 
-async function loadProducts() {
+let urlParams = new URLSearchParams(window.location.search);
+let searchValue = urlParams.get("value") || "";
+
+
+if (searchValue === "") {
+    productContainer.style.display = "none";
+} else {
+    productContainer.style.display = "grid";
+    loadProducts(searchValue);
+}
+
+
+searchInput.value = searchValue;
+
+
+let searchIcon = document.getElementById("search-icon");
+searchIcon.onclick = function () {
+    let searchValue = document.getElementById("searchInput").value;
+    window.location.href = `../pages/search.html?value=${searchValue}`;
+};
+
+
+searchInput.oninput = function () {
+    let value = searchInput.value;
+    window.history.replaceState(null, "", `search.html?value=${value}`);
+
+    if (value !== "") {
+        productContainer.style.display = "grid";
+        productContainer.innerHTML = "";
+        loadProducts(value);
+    } else {
+        productContainer.style.display = "none";
+        productContainer.innerHTML = "";
+    }
+};
+
+
+async function loadProducts(letters) {
 
     try {
-
         let products = await fetch(url);
         let productList = await products.json();
 
+        productContainer.innerHTML = "";
+
         productList.forEach(function (item) {
+            if (item.title.toLowerCase().trim().includes(letters.toLowerCase().trim())) {
+                getAllProducts(item);
+            }
+        });
 
-            getAllProducts(item)
-        })
-    }
-
-    catch (error) {
-        console.log("Load all products error in home page" + error);
+    } catch (error) {
+        console.log("Load all products error in search page: " + error);
     }
 }
 
-loadProducts();
 
 
 
 
-let productContainer = document.getElementById("productContainer")
 
 function getAllProducts(item) {
 

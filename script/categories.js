@@ -1,4 +1,7 @@
-
+let arrowIcon = document.getElementById("arrowIcon");
+arrowIcon.onclick = function () {
+    window.history.back();
+}
 
 let logo = document.getElementById("logo");
 logo.onclick = function () {
@@ -9,6 +12,7 @@ let homeLetter = document.getElementById("homeLetter");
 homeLetter.onclick = function () {
     window.location.href = "../index.html"
 }
+
 
 let searchIcon = document.getElementById("search-icon");
 searchIcon.onclick = function () {
@@ -27,6 +31,7 @@ cartProductCount.onclick = function () {
 
 let cartCount = JSON.parse(localStorage.getItem("data"));
 cartProductCount.innerText = cartCount.length;
+
 
 let url = "https://fakestoreapi.com/products";
 
@@ -52,7 +57,10 @@ async function getCategories() {
         categoryLetter.onclick = function () {
             window.location.href = `../pages/categories.html?categories=${categoryLetter.innerText}`
         }
+        categoryDiv.onclick = function () {
 
+
+        }
         categoriesContainer.appendChild(categoryDiv);
     })
 
@@ -60,14 +68,15 @@ async function getCategories() {
 
 getCategories();
 
-
+let params = new URLSearchParams(window.location.search);
+let category = params.get("categories");
 
 
 async function loadProducts() {
 
     try {
 
-        let products = await fetch(url);
+        let products = await fetch(url + "/category/" + category);
         let productList = await products.json();
 
         productList.forEach(function (item) {
@@ -82,6 +91,7 @@ async function loadProducts() {
 }
 
 loadProducts();
+
 
 
 
@@ -177,3 +187,7 @@ function handleRatingColor(rate, div) {
         div.style.backgroundColor = "rgb(9, 141, 9)"
     }
 }
+
+
+
+
